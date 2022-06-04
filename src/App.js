@@ -1,23 +1,57 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+
+
+import{
+  ControlPanel,
+  Footer,
+  Header,
+  GamePanel,
+
+} from "./components";
+
 function App() {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState("0");
+
+  
+  /*When the game starts*/
+  
+  const handleGameStart = () => {
+    if(gameStarted) {
+      console.log("Termina Jogo");
+      setGameStarted(false);
+    }
+    else {
+      console.log("Inicia Jogo");
+      setGameStarted(true);
+    }
+  }
+
+  
+  
+  /*When the user selects a new level, this callback function is executed*/
+  
+  const handleLevelChange = (event) => {
+    const { value } = event.currentTarget;
+    setSelectedLevel(value);
+  }
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="container">
+      <Header/>
+      <main className="main-content">
+        <ControlPanel
+          gameStarted={gameStarted}
+          onGameStart={handleGameStart}
+          selectedLevel={selectedLevel}
+          onLevelChange={handleLevelChange}
+        />
+        <GamePanel />
+      </main>
+      <Footer />
     </div>
   );
 }
