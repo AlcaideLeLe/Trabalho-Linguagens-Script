@@ -18,7 +18,7 @@ function ControlPanel(props) {
             <option value="3">Avançado</option>
           </select>
         </fieldset>
-        <button type="button" id="btPlay" disabled={selectedLevel== "0"} onClick={onGameStart}>
+        <button type="button" id="btPlay" disabled={selectedLevel=== "0"} onClick={onGameStart}>
           {gameStarted ? "Parar Jogo" : "Iniciar Jogo"}
         </button>
       </form>
