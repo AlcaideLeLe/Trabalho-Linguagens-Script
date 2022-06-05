@@ -20,6 +20,9 @@ function App() {
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [tabuleiroJogo, setTabuleiroJogo] = useState([[]]);
 
+
+
+  
   const handleGameStart = () => {
     if(gameStarted) {
       console.log("Termina Jogo");
@@ -30,9 +33,11 @@ function App() {
       setGameStarted(true);
       preencheTabuleiroAuxiliar();
       preencheTabuleiro();
+
       console.log(tabuleiroJogo);
       
       
+
     }
   }
   /*When the user selects a new level, this callback function is executed*/
@@ -64,4 +69,7 @@ function App() {
   );
 }
 
+
 export default App;
+
+

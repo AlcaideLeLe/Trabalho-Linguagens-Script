@@ -337,6 +337,9 @@ function GamePanel(props) {
           
           </tbody>
         </table>
+
+            
+
       </div>
     </section>
   );
