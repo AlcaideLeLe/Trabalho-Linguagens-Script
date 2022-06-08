@@ -1,8 +1,9 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import preencheTabuleiroAuxiliar from "./components/game-panel/game-panel.component"
-import preencheTabuleiro from "./components/game-panel/game-panel.component"
+import callFunction from "./components/game-panel/callFunction"
+import {TIMEOUTGAME} from "./constants"
+
 
 
 
@@ -14,13 +15,42 @@ import{
 
 } from "./components";
 
+let timerId = undefined;
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [tabuleiroJogo, setTabuleiroJogo] = useState([[]]);
 
+  
+  const [timer, setTimer] = useState(TIMEOUTGAME[selectedLevel-1]);
 
+
+  useEffect(() => {
+    let nextTimer;
+    if (gameStarted) {
+      timerId = setInterval(() => {
+        
+        setTimer((previousState) => {
+          nextTimer = previousState - 1;
+          return nextTimer;
+        });
+
+        if (nextTimer === 0) {
+          setGameStarted(false);
+
+        }
+      }, 1000);
+    } else if (timer !== TIMEOUTGAME[selectedLevel-1]) {
+      setTimer(TIMEOUTGAME[selectedLevel-1]);
+    }
+
+    return () => {
+      if (timerId) {
+        clearInterval(timerId);
+      }
+    };
+  }, [gameStarted, selectedLevel]);
 
   
   const handleGameStart = () => {
@@ -31,11 +61,8 @@ function App() {
     else {
       console.log("Inicia Jogo");
       setGameStarted(true);
-      preencheTabuleiroAuxiliar();
-      preencheTabuleiro();
-
+      setTabuleiroJogo(callFunction(selectedLevel)) ;
       console.log(tabuleiroJogo);
-      
       
 
     }
@@ -56,11 +83,14 @@ function App() {
           onGameStart={handleGameStart}
           selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
+          timer={timer}
         />
         <GamePanel 
           setTabuleiroJogo={setTabuleiroJogo}
           selectedLevel={selectedLevel}
           tabuleiroJogo={tabuleiroJogo}
+          gameStarted={gameStarted}
+
         />
         
       </main>

@@ -1,8 +1,10 @@
 import React from "react";
+import "./footer.css";
+
 function Footer(){
     return (
         <footer>
-            <p>RODRIGO ALCAIDE @ JOAO GRADA</p>
+            <p>JOAO GRADA @ RODRIGO ALCAIDE </p>
         </footer>
     );
 }

@@ -1,12 +1,14 @@
 #panel-control {
     background-color: #f1f0f0;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     font-size: smaller;
     color: grey;
-    width: 100%;
+    width: 50%;
     margin: 15px 0px;
-    border: 3px solid var(--globalColor);
+    border: 3px solid darkblue;
+    margin-left: 24%;
+    
   }
   
   #panel-control .form {
@@ -97,16 +99,20 @@
   
   #btPlay {
     border: 1px solid #5e5858;
-    background-color: #5eac52;
+    background-color: green;
+    margin-right: 10%;
     color: white;
     cursor: pointer;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
     justify-self: end;
+    border-radius: 5px;
   }
+  
+
   #btPlay:hover {
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid #751d1d;
-    background: var(--globalColor);
+    background: grey;
+    border: 1px solid black;
+    /*background: var(--globalColor);*/
   }
   
   #btPlay:disabled,
@@ -117,15 +123,19 @@
     cursor: inherit;
   }
   
+  #pointsTop{
+    color: red;
+    background-color: blue;
+    border: 1px solid black;
+    margin-left: 50%;
+  }
+
   #gameTime,
   #points {
-    background-color: grey;
-    color: white;
-    font-weight: bolder;
-    margin-left: 5px;
-    width: 45px;
-    text-align: right;
-    display: inline-block;
+    width: 65px;
+    text-align: left;
+    background-color: transparent;
+    color: var(--globalColor);
   }
   #points {
     width: 65px;
@@ -140,7 +150,7 @@
   }
   
   #panel-control #top10 {
-    grid-column: 2 / -1;
+    grid-column: 1 / 2;
   }
   
   .hide {

@@ -9,6 +9,21 @@
   margin: 0 auto;
 }
 
+table{
+  color: black;
+  border: solid #F5f5dc 10px;
+  width: 100%;
+  font-family: arial;
+}
+
+.sr-only{
+  width: 50%;
+  margin-left: 25%;
+  font-size: 20px;
+  color: darkblue;
+  font-family: inherit;
+}
+
 #game {
   width: 80%;
   min-width: 200px;
@@ -21,6 +36,8 @@
   justify-content: center;
   perspective: 1000px;
   user-select: none;
+  border: darkblue;
+  
 }
 
 #game.avancado {
@@ -31,4 +48,8 @@
 #game.intermedio {
   width: 80%;
   grid-template-columns: auto auto auto auto;
+}
+
+.sr-only {
+  text-align: center;
 }
