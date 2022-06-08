@@ -7,6 +7,7 @@
 #game-panel {
   width: 100%;
   margin: 0 auto;
+  background-color: red;
 }
 
 table{
@@ -37,8 +38,11 @@ table{
   perspective: 1000px;
   user-select: none;
   border: darkblue;
+
   
 }
+
+
 
 #game.avancado {
   width: 80%;
@@ -52,4 +56,16 @@ table{
 
 .sr-only {
   text-align: center;
+}
+
+.Selected{
+  background-color: pink;
+}
+
+.Right{
+  background-color: aqua;
+}
+
+.Risked{
+  text-decoration: line-through;
 }

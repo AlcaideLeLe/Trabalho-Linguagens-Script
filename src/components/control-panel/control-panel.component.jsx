@@ -2,12 +2,18 @@ import React from "react";
 import "./control-panel.css";
 
 function ControlPanel(props) {
-  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer } = props;
+  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer, palavrasUser, setPalavrasUser } = props;
   const gameStartedClass = gameStarted ? " gameStarted" : "";
+
+  function adicionaPalavra(){
+    
+    setPalavrasUser([...palavrasUser, document.getElementById("palavra").value.toUpperCase()]);
+    
+  }
 
   return(
     <section id="panel-control">
-      <form className="form">
+      <form  className="form" onSubmit={event => event.preventDefault()}>
         <fieldset className="form-group">
           <label htmlFor="btLevel">Nivel:</label>
           <select id="btLevel" defaultValue="0" onChange={onLevelChange}>
@@ -16,6 +22,11 @@ function ControlPanel(props) {
             <option value="2">Intermédio</option>
             <option value="3">Avançado</option>
           </select>
+          <br></br>
+          <br></br>
+          <label for="novaPalavra">Insira uma palavra</label><br></br>
+          <input type="text" id="palavra" name="novaPalavra" placeholder="Ex: Linguagem" /><br></br>
+          <button type = "button" id="novaPalavra" onClick={adicionaPalavra}>Inserir palavra</button>
         </fieldset>
         <button type="button" id="btPlay" disabled={selectedLevel=== "0"} onClick={onGameStart}>
           {gameStarted ? "Parar Jogo" : "Iniciar Jogo"}

@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import './App.css';
 import callFunction from "./components/game-panel/callFunction"
 import {TIMEOUTGAME} from "./constants"
+
 
 
 
@@ -14,6 +14,7 @@ import{
   GamePanel,
 
 } from "./components";
+import { shuffleArray } from './helpers';
 
 let timerId = undefined;
 
@@ -21,6 +22,10 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [tabuleiroJogo, setTabuleiroJogo] = useState([[]]);
+  const [palavrasSelecionadas, setPalavrasSelecionadas] = useState(([]));
+
+  const [palavrasUser, setPalavrasUser] = useState([]);
+
 
   
   const [timer, setTimer] = useState(TIMEOUTGAME[selectedLevel-1]);
@@ -61,8 +66,12 @@ function App() {
     else {
       console.log("Inicia Jogo");
       setGameStarted(true);
-      setTabuleiroJogo(callFunction(selectedLevel)) ;
+      //console.log(callFunction(selectedLevel));
+      const [tabuleiro, palavrasSelecionadas] = callFunction(selectedLevel, palavrasUser);
+      setTabuleiroJogo(tabuleiro) ;
+      setPalavrasSelecionadas(palavrasSelecionadas);
       console.log(tabuleiroJogo);
+      //console.log(palavrasSelecionadas);
       
 
     }
@@ -72,6 +81,8 @@ function App() {
   const handleLevelChange = (event) => {
     const { value } = event.currentTarget;
     setSelectedLevel(value);
+    Array.from(document.querySelectorAll('.Right')).forEach((el) => el.classList.remove('Right'));
+
   }
   
   return (
@@ -84,12 +95,17 @@ function App() {
           selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
           timer={timer}
+          palavrasUser={palavrasUser}
+          setPalavrasUser={setPalavrasUser}
         />
         <GamePanel 
           setTabuleiroJogo={setTabuleiroJogo}
+          setPalavrasSelecionadas={setPalavrasSelecionadas}
           selectedLevel={selectedLevel}
           tabuleiroJogo={tabuleiroJogo}
           gameStarted={gameStarted}
+          palavrasSelecionadas={palavrasSelecionadas}
+        
 
         />
         
@@ -101,5 +117,3 @@ function App() {
 
 
 export default App;
-
-
