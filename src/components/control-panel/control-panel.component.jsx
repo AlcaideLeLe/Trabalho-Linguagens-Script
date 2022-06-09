@@ -1,15 +1,21 @@
 import React from "react";
 import "./control-panel.css";
+import GamePanel from "../game-panel/game-panel.component";
 
 function ControlPanel(props) {
-  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer, palavrasUser, setPalavrasUser } = props;
+  const { gameStarted, selectedLevel, onGameStart, onLevelChange, timer, palavrasUser, setPalavrasUser, points } = props;
   const gameStartedClass = gameStarted ? " gameStarted" : "";
+
+  
 
   function adicionaPalavra(){
     
     setPalavrasUser([...palavrasUser, document.getElementById("palavra").value.toUpperCase()]);
     
   }
+
+  
+   
 
   return(
     <section id="panel-control">
@@ -43,7 +49,7 @@ function ControlPanel(props) {
         </dl>
         <dl className={`list-item left${gameStartedClass}`}>
           <dt>Pontuação:</dt>
-          <dd id="points">0</dd>
+          <dd id="points">{points}</dd>
         </dl>
         <div id="top10" className={`right`}>
           

@@ -11,4 +11,4 @@ export const CARDS_LOGOS = [
     "ember",
 ];
 
-export const TIMEOUTGAME = [10 , 300 , 600 ]; // seconds
+export const TIMEOUTGAME = [150 , 300 , 600 ]; // seconds

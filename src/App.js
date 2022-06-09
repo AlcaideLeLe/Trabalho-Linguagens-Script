@@ -23,12 +23,15 @@ function App() {
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [tabuleiroJogo, setTabuleiroJogo] = useState([[]]);
   const [palavrasSelecionadas, setPalavrasSelecionadas] = useState(([]));
+  const [palavrasCertas, setPalavrasCertas] = useState(([]));
 
   const [palavrasUser, setPalavrasUser] = useState([]);
-
-
   
+
   const [timer, setTimer] = useState(TIMEOUTGAME[selectedLevel-1]);
+  const [points, setPoints] = useState(0);
+ 
+
 
 
   useEffect(() => {
@@ -66,6 +69,7 @@ function App() {
     else {
       console.log("Inicia Jogo");
       setGameStarted(true);
+      setPoints(0);
       //console.log(callFunction(selectedLevel));
       const [tabuleiro, palavrasSelecionadas] = callFunction(selectedLevel, palavrasUser);
       setTabuleiroJogo(tabuleiro) ;
@@ -73,7 +77,6 @@ function App() {
       console.log(tabuleiroJogo);
       //console.log(palavrasSelecionadas);
       
-
     }
   }
   /*When the user selects a new level, this callback function is executed*/
@@ -85,6 +88,12 @@ function App() {
 
   }
   
+  function declaraVitoria(){
+    
+    
+    setGameStarted(false);
+  }
+
   return (
     <div id="container">
       <Header/>
@@ -97,7 +106,11 @@ function App() {
           timer={timer}
           palavrasUser={palavrasUser}
           setPalavrasUser={setPalavrasUser}
+          points={points}
+
+          
         />
+        {gameStarted && 
         <GamePanel 
           setTabuleiroJogo={setTabuleiroJogo}
           setPalavrasSelecionadas={setPalavrasSelecionadas}
@@ -105,9 +118,15 @@ function App() {
           tabuleiroJogo={tabuleiroJogo}
           gameStarted={gameStarted}
           palavrasSelecionadas={palavrasSelecionadas}
-        
+          setPoints={setPoints}
+          points={points}
+          declaraVitoria={declaraVitoria}
+          palavrasCertas={palavrasCertas}
+          setPalavrasCertas={setPalavrasCertas}
+
 
         />
+    }
         
       </main>
       <Footer />

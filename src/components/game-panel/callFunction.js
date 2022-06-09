@@ -40,8 +40,8 @@ function callFunction(selectedLevel, palavrasUser) {
 
   function encontraLetraRandom() {
     var resultado = "";
-    var caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    //var caracteres = '';
+    //var caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var caracteres = '';
     var caracteresLength = caracteres.length;
 
     resultado += caracteres.charAt(
@@ -59,8 +59,13 @@ function callFunction(selectedLevel, palavrasUser) {
   }
 
   function encontraRandomWord(){
+    
     let palavras = [...randomWords, ...palavrasUser];
-    let posicao = encontraNrRandom(palavras.length);
+    let posicao;
+    do{
+      posicao = encontraNrRandom(palavras.length);
+    }while(palavrasSelecionadas.includes(palavras[posicao]))
+    
     return palavras[posicao];
   }
    
@@ -75,16 +80,12 @@ function callFunction(selectedLevel, palavrasUser) {
     return posicao;
   }
 
-  console.log(tabuleiro)
-  console.log(tabuleiroaux)
+  
   function organizaTabuleiro() {
     let nrpalavras = 0;
 
     do {
-      console.log("aa")
-      console.log(tabuleiro)
-      console.log(tabuleiroaux)
-      console.log("aa")
+      
       let nrRandom = Math.floor(Math.random() * 6);
       console.log(nrRandom);
       if (nrRandom === 0) {
@@ -322,10 +323,7 @@ function callFunction(selectedLevel, palavrasUser) {
     return [tabuleiro, tabuleiroaux];
   }
   
-  console.log("aa")
-  console.log(tabuleiro)
-  console.log(tabuleiroaux)
-  console.log("aa")
+  
   preencheTabuleiroAuxiliar();
   preencheTabuleiro();
   return [tabuleiro, palavrasSelecionadas];

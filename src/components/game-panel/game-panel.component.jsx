@@ -1,13 +1,15 @@
-import React from "react";
+import React, { memo } from "react";
 
 import "./game-panel.css";
 
+
 function GamePanel(props) {
-  const { tabuleiroJogo, palavrasSelecionadas, gameStarted } = props;
+  const { tabuleiroJogo, palavrasSelecionadas, gameStarted, setPoints, points, selectedLevel, declaraVitoria, palavrasCertas, setPalavrasCertas } = props;
 
   let selecionado = false;
   let letrasSelecionadas = "";
-  let palavrasCertas = [];
+  let nrPalavrasCertas = 0;
+      
   
 
 
@@ -22,13 +24,11 @@ function GamePanel(props) {
   }
   function mouseMove(event){
     if(selecionado && !event.currentTarget.classList.contains("Selected")){
-      console.log(event.currentTarget.innerText);
+      
       letrasSelecionadas += event.currentTarget.innerText;
       event.currentTarget.className += " Selected";
       let i;
-      
-
-      
+  
       if(palavrasCertas.length > palavrasSelecionadas.length){
         return
       }
@@ -36,30 +36,47 @@ function GamePanel(props) {
         for(i=0; i<palavrasSelecionadas.length; i++){
               if(letrasSelecionadas === palavrasSelecionadas[i]){
                 let elemento = document.getElementsByClassName("Selected");
-                
                 for (let index = 0; index < elemento.length; index++) {
                     elemento[index].classList.add("Right");
                 }
-                
+                setPoints(points + selectedLevel * 3 + 3);
                 riskWord(palavrasSelecionadas[i]);
-
-                palavrasCertas.push(letrasSelecionadas);
+                let palavrasCertasTemp = [...palavrasCertas, letrasSelecionadas];
+                setPalavrasCertas(palavrasCertasTemp);
+                //palavrasCertas.push(letrasSelecionadas);
                 letrasSelecionadas = "";
-                //console.log("asd");
+                console.log(palavrasCertasTemp.length, palavrasSelecionadas.length);
+              
+                if(palavrasCertasTemp.length === palavrasSelecionadas.length){
+                  declaraVitoria();
+                }
+
+                
+                         
+               //console.log("asd");
               }
           }
+                
         }
+
+        
+
+        
     }
   }
 
+ 
+  
+
   function riskWord(palavra){
-    console.log(palavra);
     document.getElementById("col2-" + palavra + "-").classList.add("Risked");
   }
   
 
   return (
     <section className="game-panel">
+
+
       <h3 className="sr-only">Tabuleiro de Jogo</h3>
       <div id = "game">
       <table onMouseDown={mouseDown} onMouseUp = {mouseUp}>
@@ -70,7 +87,7 @@ function GamePanel(props) {
                 <tr key={`linha1-${index}-`}>
                 {linha.map((coluna, cindex) => {
                   return (
-                    <td onMouseMove={mouseMove} key={`coluna1-${index}-${cindex}-`}>{ coluna }</td>
+                    <td onMouseMove={mouseMove} key={`coluna1-${index}-${cindex}-`} className="text-center">{ coluna }</td>
                   );
                 })}
                 </tr>  
@@ -106,6 +123,10 @@ function GamePanel(props) {
 
       </div>
     </section>
+
+    
   );
 }
+
+
 export default GamePanel;
